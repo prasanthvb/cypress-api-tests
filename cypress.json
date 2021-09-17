@@ -16,5 +16,14 @@
             "json": true
         }
     },
-    "testFiles" : "**/*/*.spec.js"
+    "testFiles" : "**/*/*.spec.js",
+    "env": {
+        "domainUrl": "https://thinking-tester-contact-list.herokuapp.com/",
+        "validStatusCode": 200,
+        "validStatusCode1": 201,
+        "invalidStatusCode": 500,
+        "invalidStatusCode1": 401,
+        "invalidStatusCode2": 404,
+        "deleteContactMessage": "Contact deleted"
+      }
 }

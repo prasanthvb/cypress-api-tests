@@ -1,2 +1,2 @@
 # cypress-api-tests
-Cypress API Automation Framework using Type-Script
+Cypress API Automation Framework using java-Script

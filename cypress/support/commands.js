@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('get_token', (requestbody)=>{
+   // var response = ""
+    cy.request({
+        method: 'POST',
+        url: Cypress.env("domainUrl") + "users",
+        failOnStatusCode: false,
+        json: true,
+        form: true,
+        body: requestbody,
+     }).then((response) => {
+      //  token = response.body.token;
+        return response;
+     }) }) 
