@@ -1,0 +1,29 @@
+{
+    "contactBody": {
+        "firstName": "Customer",
+        "lastName": "Testing",
+        "birthdate": "1970-01-01",
+        "email": "Testuser@testing.com",
+        "phone": "9944544567",
+        "street1": "2 Main St.",
+        "street2": "Town Road",
+        "city": "Angelos",
+        "stateProvince": "LA",
+        "postalCode": "12345",
+        "country": "USA"
+    },
+
+    "updateContactBody": {
+        "firstName": "Customer2",
+        "lastName": "Testing2",
+        "birthdate": "1970-02-02",
+        "email": "Testuser@testing.com",
+        "phone": "9944544567",
+        "street1": "2 Main St.",
+        "street2": "Town Road",
+        "city": "Angelos",
+        "stateProvince": "LA",
+        "postalCode": "12345",
+        "country": "USA"
+    }
+}

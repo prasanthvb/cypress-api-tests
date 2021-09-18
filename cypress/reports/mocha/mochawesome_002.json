@@ -1,0 +1,164 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-09-18T08:01:30.287Z",
+    "end": "2021-09-18T08:02:15.447Z",
+    "duration": 45160,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d5e66375-78a7-4696-a357-f933bea2d3b9",
+      "title": "",
+      "fullFile": "cypress/integration/WebTesting/Testcase.spec.js",
+      "file": "cypress/integration/WebTesting/Testcase.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f7d80848-943e-4dd7-b602-836280cd19c7",
+          "title": "Automation for a Ecommerce Application Using Page Object Model",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validate search suggestion is not given to user until 3 char are populated",
+              "fullTitle": "Automation for a Ecommerce Application Using Page Object Model Validate search suggestion is not given to user until 3 char are populated",
+              "timedOut": null,
+              "duration": 15677,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//verify the Search button functionality\nhomePage.searchbox().type(data.searchtextNone);\nhomePage.searchResult().should('not.exist');\nhomePage.searchbox().clear().type(data.searchtext);\nhomePage.searchResult().should('be.visible');\nhomePage.searchbutton().should('be.enabled').click(); // Test to verify the search related products are displayed\n// Scenario: Validate results are displayed according the search made by user.\ncy.get('.right-block h5 a').each(function ($el, index, $list) {\n  var producttext = $el.text().trim();\n  expect(producttext).includes(data.searchtext);\n});",
+              "err": {},
+              "uuid": "25e764cb-6fa7-45f4-a3a7-16a21354e239",
+              "parentUUID": "f7d80848-943e-4dd7-b602-836280cd19c7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate user is able to apply the large size catalouge filter for T-shirt section",
+              "fullTitle": "Automation for a Ecommerce Application Using Page Object Model Validate user is able to apply the large size catalouge filter for T-shirt section",
+              "timedOut": null,
+              "duration": 6291,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Click on Tshirt link from Home Page\nhomePage.tShirtLink().click(); //Click on Large Checkbox\ntShirtPage.largecheckbox().click(); //Verify only one product is displayed\ntShirtPage.largeSizeProduct().should('be.visible');",
+              "err": {},
+              "uuid": "6606da96-3d53-4d0e-8300-f509d39255ef",
+              "parentUUID": "f7d80848-943e-4dd7-b602-836280cd19c7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate user is able to upload a file on contact us page.",
+              "fullTitle": "Automation for a Ecommerce Application Using Page Object Model Validate user is able to upload a file on contact us page.",
+              "timedOut": null,
+              "duration": 5207,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Click on contact us link\ntShirtPage.contactUsLink().click(); //Verify Attach file scenario\nvar filepath = 'image1.jpeg';\ncontactUsPage.fileUpload().attachFile(filepath);\ncontactUsPage.fileName().should('contain.text', 'image1.jpeg');",
+              "err": {},
+              "uuid": "d89a43bb-749c-4cff-a5a8-12daf8a2301f",
+              "parentUUID": "f7d80848-943e-4dd7-b602-836280cd19c7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate total cart amount and individual product price",
+              "fullTitle": "Automation for a Ecommerce Application Using Page Object Model Validate total cart amount and individual product price",
+              "timedOut": null,
+              "duration": 13953,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Verify the number of products\nhomePage.allProductsAddtocartBtn().should('have.length', 7); // Add 5 products to cart\nfor (var i = 1; i <= data.productcount; i++) {\n  homePage.allProductsAddtocartBtn().eq(i).click();\n  homePage.continueShoppingBtn().click();\n}\n; //Click on Cart Button\nhomePage.cartBtn().click(); // Verify the Price of all Items in cart with Total Price \n// This method can me modified in POM\ncartPage.productPrice().each(function ($el, index, $list) {\n  cartPage.totalProducts().invoke('text').then(function (totalproductprice) {\n    cartPage.totalShipping().invoke('text').then(function (totalshippingprice) {\n      cartPage.totalPrice().invoke('text').then(function (totalPrice) {\n        var text = $el.text().trim().replace(/[^0-9.]/g, \"\");\n        var value = parseFloat(text);\n        count = count + value;\n        var totalproducts = totalproductprice.trim().replace(/[^0-9.]/g, \"\");\n        var tproduct = parseFloat(totalproducts);\n        if (tproduct === count) {\n          var totalshipping = totalshippingprice.trim().replace(/[^0-9.]/g, \"\");\n          var tshiping = parseFloat(totalshipping);\n          tproduct = tproduct + tshiping;\n          var totalprice = totalPrice.trim().replace(/[^0-9.]/g, \"\");\n          var total = parseFloat(totalprice);\n          expect(tproduct).to.eq(total);\n        }\n        ;\n      });\n    });\n  });\n});",
+              "err": {},
+              "uuid": "c948136c-8a40-47e9-bc5e-6258f0989f39",
+              "parentUUID": "f7d80848-943e-4dd7-b602-836280cd19c7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "25e764cb-6fa7-45f4-a3a7-16a21354e239",
+            "6606da96-3d53-4d0e-8300-f509d39255ef",
+            "d89a43bb-749c-4cff-a5a8-12daf8a2301f",
+            "c948136c-8a40-47e9-bc5e-6258f0989f39"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 41128,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}
