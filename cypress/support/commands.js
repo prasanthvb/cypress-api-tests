@@ -18,13 +18,14 @@ Cypress.Commands.add('getProductName', (productName) => {
    })
 })
 
-Cypress.Commands.add('addToCart', () => {
-   cy.get('[title="Add to cart"]:visible').each(($el, index, $list) => {
-      if (index <= 5) {
-         cy.get('[title="Add to cart"]:visible').click();
-         cy.get('.continue > span').click();
-      }
-   })
+let count = 0;
+Cypress.Commands.add('countPrice', () => {
+   cy.get('.cart_total> .price').each(($el, index, $list) => {
+    let text= $el.text().trim().replace(/[^0-9.]/g, "");
+    var value = parseFloat(text);
+    count= count + value;  
+})
+return count;
 })
 //
 // -- This is a child command --

@@ -1,0 +1,183 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-09-18T07:44:21.114Z",
+    "end": "2021-09-18T07:44:31.005Z",
+    "duration": 9891,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "99eff8df-dc10-4ca9-b40d-6d63b494806c",
+      "title": "",
+      "fullFile": "cypress/integration/ApiTesting/customer_api_testcases.spec.js",
+      "file": "cypress/integration/ApiTesting/customer_api_testcases.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "68231c70-0dd6-400a-b463-32423b9770db",
+          "title": "Create a Customer and verify the Customer data",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Create the user using POST method",
+              "fullTitle": "Create a Customer and verify the Customer data Create the user using POST method",
+              "timedOut": null,
+              "duration": 8609,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = '/users';\nemailValue = \"\".concat((0, _Utility.randomStringValue)()).concat(userdetails.email);\nvar requestbody = {\n  \"firstName\": userdetails.firstName,\n  \"lastName\": userdetails.lastName,\n  \"email\": emailValue,\n  \"password\": userdetails.password\n};\ncy.request({\n  method: 'POST',\n  url: endpoint,\n  body: requestbody\n}).then(function (response) {\n  createNewUserResponse = JSON.parse(JSON.stringify(response));\n  expect(createNewUserResponse.status).to.eq(Cypress.env('validStatusCode1'));\n  access_token = createNewUserResponse.body.token;\n});",
+              "err": {},
+              "uuid": "3970f562-82bc-4fd8-a82b-6dd9eef8d16f",
+              "parentUUID": "68231c70-0dd6-400a-b463-32423b9770db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Create the contact using POST method",
+              "fullTitle": "Create a Customer and verify the Customer data Create the contact using POST method",
+              "timedOut": null,
+              "duration": 335,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = '/contacts';\ncy.request({\n  method: 'POST',\n  url: endpoint,\n  headers: {\n    'Authorization': 'Bearer ' + access_token\n  },\n  body: contactdetails.contactBody\n}).then(function (response) {\n  createNewContactResponse = JSON.parse(JSON.stringify(response));\n  expect(createNewContactResponse.status).to.eq(Cypress.env('validStatusCode1'));\n  contactID = createNewContactResponse.body._id;\n});",
+              "err": {},
+              "uuid": "ac194155-520f-472a-88cc-86ee0fe1687a",
+              "parentUUID": "68231c70-0dd6-400a-b463-32423b9770db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Update the contact details and verify the changes",
+              "fullTitle": "Create a Customer and verify the Customer data Update the contact details and verify the changes",
+              "timedOut": null,
+              "duration": 315,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = '/contacts/' + contactID;\ncy.request({\n  method: 'PUT',\n  url: endpoint,\n  headers: {\n    'Authorization': 'Bearer ' + access_token\n  },\n  body: contactdetails.updateContactBody\n}).then(function (response) {\n  updateContactResponse = JSON.parse(JSON.stringify(response));\n  expect(updateContactResponse.status).to.eq(Cypress.env('validStatusCode'));\n  expect(updateContactResponse.body.firstName).to.not.eq(createNewContactResponse.body.firstName);\n  expect(updateContactResponse.body.lastName).to.not.eq(createNewContactResponse.body.lastName);\n  expect(updateContactResponse.body.birthdate).to.not.eq(createNewContactResponse.body.birthdate);\n});",
+              "err": {},
+              "uuid": "80200261-a404-4aa2-b657-2ecf97b87ddb",
+              "parentUUID": "68231c70-0dd6-400a-b463-32423b9770db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Delete the created contact and verify the contact is deleted",
+              "fullTitle": "Create a Customer and verify the Customer data Delete the created contact and verify the contact is deleted",
+              "timedOut": null,
+              "duration": 289,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = '/contacts/' + contactID;\ncy.request({\n  method: 'DELETE',\n  url: endpoint,\n  headers: {\n    'Authorization': 'Bearer ' + access_token\n  }\n}).then(function (response) {\n  ContactResponse = JSON.parse(JSON.stringify(response));\n  expect(ContactResponse.status).to.eq(Cypress.env('validStatusCode'));\n  expect(ContactResponse.body).to.eq(Cypress.env('deleteContactMessage'));\n});",
+              "err": {},
+              "uuid": "c66e2686-9a8c-4ac5-92e4-b8a2aebb4f31",
+              "parentUUID": "68231c70-0dd6-400a-b463-32423b9770db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Get Contact API returns error while fetching the deleted contact ",
+              "fullTitle": "Create a Customer and verify the Customer data Get Contact API returns error while fetching the deleted contact ",
+              "timedOut": null,
+              "duration": 290,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = '/contacts/' + contactID;\ncy.request({\n  method: 'GET',\n  url: endpoint,\n  failOnStatusCode: false,\n  headers: {\n    'Authorization': 'Bearer ' + access_token\n  }\n}).then(function (response) {\n  ContactResponse = JSON.parse(JSON.stringify(response));\n  expect(ContactResponse.status).to.eq(Cypress.env('invalidStatusCode2'));\n});",
+              "err": {},
+              "uuid": "6d22be02-3e42-4f15-bbcf-bfca31e2d846",
+              "parentUUID": "68231c70-0dd6-400a-b463-32423b9770db",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3970f562-82bc-4fd8-a82b-6dd9eef8d16f",
+            "ac194155-520f-472a-88cc-86ee0fe1687a",
+            "80200261-a404-4aa2-b657-2ecf97b87ddb",
+            "c66e2686-9a8c-4ac5-92e4-b8a2aebb4f31",
+            "6d22be02-3e42-4f15-bbcf-bfca31e2d846"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9838,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}

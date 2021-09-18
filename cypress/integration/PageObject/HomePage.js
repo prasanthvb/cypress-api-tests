@@ -6,6 +6,15 @@ class HomePage {
     searchbutton() {
         return cy.get('[name="submit_search"]')
     }
+
+    searchResultNone() {
+        return cy.get('.ac_results[style*="display: none"]')
+    }
+
+    searchResult() {
+        return cy.get('.ac_results')
+    }
+
     productName() {
         return cy.get('.right-block h5 a')
     }
@@ -15,9 +24,17 @@ class HomePage {
     }
 
     allProductsAddtocartBtn() {
-        return cy.get('[title="Add to cart"]:visible')
+        return cy.get('.ajax_add_to_cart_button:visible')
     }
 
+    continueShoppingBtn() {
+        return cy.get('.continue > span')
+    }
+
+    cartBtn() {
+        return cy.get('[title="View my shopping cart"]')
+    }
+    
 }
 export default HomePage;
 

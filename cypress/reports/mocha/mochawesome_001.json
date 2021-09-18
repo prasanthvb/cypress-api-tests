@@ -1,0 +1,164 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-09-18T07:44:36.313Z",
+    "end": "2021-09-18T07:44:37.314Z",
+    "duration": 1001,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9c9984d7-4e06-4839-9609-cee75734ac55",
+      "title": "",
+      "fullFile": "cypress/integration/ApiTesting/user_api_testcases.spec.js",
+      "file": "cypress/integration/ApiTesting/user_api_testcases.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b1b7a88a-7412-4c11-8ecd-d7e85065ba0b",
+          "title": "Create a user and verify the user data",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Create the user using POST method",
+              "fullTitle": "Create a user and verify the user data Create the user using POST method",
+              "timedOut": null,
+              "duration": 369,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = '/users';\nemailValue = \"\".concat((0, _Utility.randomStringValue)()).concat(userdetails.email);\nvar requestbody = {\n  \"firstName\": userdetails.firstName,\n  \"lastName\": userdetails.lastName,\n  \"email\": emailValue,\n  \"password\": userdetails.password\n};\ncy.request({\n  method: 'POST',\n  url: endpoint,\n  failOnStatusCode: false,\n  body: requestbody\n}).then(function (response) {\n  createNewUserResponse = JSON.parse(JSON.stringify(response));\n  expect(createNewUserResponse.status).to.eq(Cypress.env('validStatusCode1'));\n  expect(createNewUserResponse.body).to.not.be[\"null\"];\n});",
+              "err": {},
+              "uuid": "5a0c16a6-d08d-4f5b-8e2f-086fc25ee0c9",
+              "parentUUID": "b1b7a88a-7412-4c11-8ecd-d7e85065ba0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verify the created user data using GET method",
+              "fullTitle": "Create a user and verify the user data Verify the created user data using GET method",
+              "timedOut": null,
+              "duration": 310,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = 'users/me';\naccess_token = createNewUserResponse.body.token;\ncy.request({\n  method: 'GET',\n  url: endpoint,\n  headers: {\n    'Authorization': 'Bearer ' + access_token\n  }\n}).then(function (response) {\n  NewUserResponse = JSON.parse(JSON.stringify(response));\n  expect(NewUserResponse.status).to.eq(Cypress.env('validStatusCode'));\n  expect(NewUserResponse.body).to.not.be[\"null\"];\n  expect(NewUserResponse.body.firstName).to.eq(userdetails.firstName);\n  expect(NewUserResponse.body.lastName).to.eq(userdetails.lastName);\n  expect(NewUserResponse.body.email).to.eq(emailValue);\n});",
+              "err": {},
+              "uuid": "f9236ab3-b7b0-4eff-b6a9-3d4d5b3427c6",
+              "parentUUID": "b1b7a88a-7412-4c11-8ecd-d7e85065ba0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verify that the created user fields are not empty",
+              "fullTitle": "Create a user and verify the user data Verify that the created user fields are not empty",
+              "timedOut": null,
+              "duration": 22,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(NewUserResponse.body._id).to.not.be[\"null\"];\nexpect(NewUserResponse.body.firstName).to.not.be[\"null\"];\nexpect(NewUserResponse.body.lastName).to.not.be[\"null\"];\nexpect(NewUserResponse.body.email).to.not.be[\"null\"];",
+              "err": {},
+              "uuid": "b4898bcc-b04b-4394-920d-7837b475dc86",
+              "parentUUID": "b1b7a88a-7412-4c11-8ecd-d7e85065ba0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verify user is not able to fetch user details with invalid token",
+              "fullTitle": "Create a user and verify the user data Verify user is not able to fetch user details with invalid token",
+              "timedOut": null,
+              "duration": 276,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var endpoint = 'users/me';\naccess_token = createNewUserResponse.body.token;\ncy.request({\n  method: 'GET',\n  url: endpoint,\n  failOnStatusCode: false,\n  headers: {\n    'Authorization': 'Bearer ' + access_token + (0, _Utility.randomStringValue)()\n  }\n}).then(function (response) {\n  NewUserInvalidResponse = JSON.parse(JSON.stringify(response));\n  expect(NewUserInvalidResponse.status).to.eq(Cypress.env('invalidStatusCode1'));\n});",
+              "err": {},
+              "uuid": "8090bcd9-2a03-4453-b415-3e370aeae1df",
+              "parentUUID": "b1b7a88a-7412-4c11-8ecd-d7e85065ba0b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5a0c16a6-d08d-4f5b-8e2f-086fc25ee0c9",
+            "f9236ab3-b7b0-4eff-b6a9-3d4d5b3427c6",
+            "b4898bcc-b04b-4394-920d-7837b475dc86",
+            "8090bcd9-2a03-4453-b415-3e370aeae1df"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 977,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}
