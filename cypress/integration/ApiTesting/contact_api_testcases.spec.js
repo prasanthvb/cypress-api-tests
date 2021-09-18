@@ -14,8 +14,8 @@ let emailValue = '';
 let access_token = '';
 let contactID = '';
 
-// Test suite to create and verify the Customer details
-describe('Create a Customer and verify the Customer data', function () {
+// Test suite to create and verify the Contact details
+describe('Create a Contact and verify the Contact data', function () {
 
   // Before Method : Use POST method to Create the User along with Access Token
   // This method can be simplified through command.js
@@ -60,7 +60,7 @@ describe('Create a Customer and verify the Customer data', function () {
 
 
   // Test case to update the contact and very the changes - First Name , Last name and DOB is updated here
-  it('Update the contact details and verify the changes', () => {
+  it('Update the contact details and verify the changes Using PUT method', () => {
     let endpoint = '/contacts/' + contactID;
     cy.request({
       method: 'PUT',
@@ -80,7 +80,7 @@ describe('Create a Customer and verify the Customer data', function () {
   });
 
   //  This test will delete the created contant
-  it('Delete the created contact and verify the contact is deleted', () => {
+  it('Delete the created contact and verify the contact is deleted using DELETE method', () => {
     let endpoint = '/contacts/' + contactID;
     cy.request({
       method: 'DELETE',
